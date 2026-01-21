@@ -17,15 +17,10 @@ import java.lang.reflect.Type;
 abstract class AbstractController<I extends Serializable, D extends EntityDTO<I>, L, P extends Serializable, S extends BaseService<I, D, L, P>> {
 	protected static final String WRONG_OBJECT = "Wrong object";
 
-	protected final String dtoType;
-	protected final String listDtoType;
 	protected final S service;
 
 	protected AbstractController(S service) {
 		this.service = service;
-		Type[] argumentTypes = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments();
-		this.dtoType = ((Class<?>) argumentTypes[1]).getSimpleName();
-		this.listDtoType = ((Class<?>) argumentTypes[2]).getSimpleName();
 	}
 
 	public D save(D entity) {
